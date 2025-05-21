@@ -3,6 +3,7 @@ package com.example.fcm_client
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -13,6 +14,15 @@ import com.google.firebase.messaging.RemoteMessage
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d("FCM", "Mensaje recibido de: ${remoteMessage.from}")
+
+        val title = remoteMessage.notification?.title ?: "Sin título"
+        val body = remoteMessage.notification?.body ?: "Sin mensaje"
+
+        // Enviar a la UI
+        val intent = Intent("com.example.fcm_client.MENSAJE_RECIBIDO")
+        intent.putExtra("title", title)
+        intent.putExtra("body", body)
+        sendBroadcast(intent)
 
         // Si el mensaje tiene contenido de notificación
         remoteMessage.notification?.let {
