@@ -35,7 +35,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d("FCM", "Nuevo token: $token")
-        // Aquí puedes enviar el token a tu servidor si deseas identificar dispositivos
     }
 
     @SuppressLint("MissingPermission")
@@ -56,7 +55,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         val builder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_launcher_foreground) // Usa tu ícono aquí
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
